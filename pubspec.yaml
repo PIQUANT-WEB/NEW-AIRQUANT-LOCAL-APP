@@ -50,6 +50,7 @@ dependencies:
   device_info_plus: ^8.2.2 # 폰, 태블릿 등 장치 정보
   external_path: ^1.0.3 # 외부 저장소 경로 제공
   sqflite: ^2.3.3+1 # db
+  syncfusion_flutter_datepicker: ^26.2.14
 
 
 dev_dependencies:
