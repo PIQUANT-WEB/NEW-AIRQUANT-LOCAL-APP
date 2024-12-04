@@ -161,12 +161,14 @@ class _SpalshState extends State<Splash> {
         Future.delayed(Duration(seconds: 2), () {
           ExcelUtils.deleteOldFolder(context); // 1년 전 폴더 삭제
           // Navigator.pushReplacementNamed(context, '/home');
-          Navigator.pushReplacementNamed(context, '/connect');
+          // Navigator.pushReplacementNamed(context, '/connect');
+          Navigator.pushReplacementNamed(context, '/settings');
         });
       } else {
         print('구역명 설정 x -> 초기 구역명 설정 화면');
         Future.delayed(Duration(seconds: 2), () {
-          Navigator.pushReplacementNamed(context, '/initareaname');
+          // Navigator.pushReplacementNamed(context, '/initareaname');
+          Navigator.pushReplacementNamed(context, '/settings');
         });
       }
     });

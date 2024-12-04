@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 
 import '../../repositories/measurement_data_repo.dart';
 import '../../repositories/measurement_date_repo.dart';
+import '../../widgets/calendar_widget.dart';
 
 class DownloadPage extends StatefulWidget {
   const DownloadPage({super.key});
@@ -20,7 +21,19 @@ class _DownloadPageState extends State<DownloadPage> {
   MeasurementDateRepo measurementDateRepo = MeasurementDateRepo();
   MeasurementDataRepo measurementDataRepo = MeasurementDataRepo();
 
-  String date = '';
+
+  late String selectedDate;
+
+  // 날짜 선택 콜백
+  void _onDateSelected(DateTime date) {
+    setState(() {
+      // 원하는 날짜 포맷으로 변환
+      String formattedDate = DateFormat('yyyy/MM/dd').format(date);
+      selectedDate = formattedDate;
+    });
+
+    print("Selected Date: $selectedDate");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,27 +53,24 @@ class _DownloadPageState extends State<DownloadPage> {
           child: Container(
             padding: EdgeInsets.fromLTRB(0, 30, 500, 0),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 20, 10),
-
-                    /// 날자 입력란
-                    child: TextField(
-                      style: TextStyle(fontSize: 22),
-                      onChanged: (value) {
-                        date = value;
-                      },
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(hintText: '2024/12/03'),
-                      // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.],
-                      controller: TextEditingController(text: date),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: CalendarInputWidget(
+                      labelText: 'Select date'.tr(),
+                      onDateSelected: _onDateSelected,
                     ),
                   ),
                 ),
+                SizedBox(width: 15),
                 OutlinedButton(
                   style: TextButton.styleFrom(
-                      fixedSize: Size(100, 50),
+                      fixedSize: Size(150, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0), // 버튼의 라운드 값을 설정
                       ),
@@ -69,12 +79,16 @@ class _DownloadPageState extends State<DownloadPage> {
                   /// 다운로드 버튼
                   child: Text("Download", style: TextStyle(fontSize: 20)).tr(),
                   onPressed: () async {
-                    /// TODO 아름 : 예외 처리 print 부분은 알림창으로 바꿔주세용
                     // 날짜 조회
-                    MeasurementDate? measurementDate = await measurementDateRepo.findByMeasurementDate(date);
+                    MeasurementDate? measurementDate = await measurementDateRepo.findByMeasurementDate(selectedDate);
+
                     if (measurementDate == null) {
                       // 예외 처리
                       print("해당 날짜 데이터가 없습니다.");
+                      showNoticeDialog(
+                          context: context,
+                          contents: "해당 날짜 데이터가 없습니다.",
+                          color: Colors.redAccent);
                       return;
                     }
 
@@ -84,18 +98,29 @@ class _DownloadPageState extends State<DownloadPage> {
                     if (measurementData == null) {
                       // 예외 처리
                       print("데이터 조회에 실패했습니다.");
+                      showNoticeDialog(
+                          context: context,
+                          contents: "데이터 조회에 실패했습니다.",
+                          color: Colors.redAccent);
                       return;
                     }
                     if (measurementData.isEmpty) {
                       // 예외 처리
                       print("해당 날짜 데이터가 없습니다.");
+                      showNoticeDialog(
+                          context: context,
+                          contents: "해당 날짜 데이터가 없습니다.",
+                          color: Colors.redAccent);
                       return;
                     }
 
                     // csv data 저장
                     await ExcelUtils.downloadCsv(measurementDate.measurementDate, measurementData);
                     print("내보낸 파일은 스마트폰의 '내장메모리 > Download > AIRQUANT_DATA' 폴더에 저장됩니다.\n단, 기기별로 저장 위치가 다를 수 있습니다.");
-
+                    showNoticeDialog(
+                        context: context,
+                        contents: "내보낸 파일은 스마트폰의 '내장메모리 > Download > AIRQUANT_DATA' 폴더에 저장됩니다.\n단, 기기별로 저장 위치가 다를 수 있습니다.",
+                        color: Colors.blue);
                     // List<MeasurementData> testData = [
                     //   MeasurementData(
                     //     measurementDateId: 1,
