@@ -160,8 +160,8 @@ class _SpalshState extends State<Splash> {
         print('구역명 설정 O -> 다음 화면');
         Future.delayed(Duration(seconds: 2), () {
           ExcelUtils.deleteOldFolder(context); // 1년 전 폴더 삭제
-          Navigator.pushReplacementNamed(context, '/home');
-          // Navigator.pushReplacementNamed(context, '/connect');
+          // Navigator.pushReplacementNamed(context, '/home');
+          Navigator.pushReplacementNamed(context, '/connect');
           // Navigator.pushReplacementNamed(context, '/settings');
         });
       } else {
