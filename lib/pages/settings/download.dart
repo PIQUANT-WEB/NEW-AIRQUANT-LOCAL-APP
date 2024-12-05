@@ -51,7 +51,7 @@ class _DownloadPageState extends State<DownloadPage> {
         Flexible(
           flex: 9,
           child: Container(
-            padding: EdgeInsets.fromLTRB(0, 30, 500, 0),
+            padding: EdgeInsets.fromLTRB(0, 30, 400, 0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
