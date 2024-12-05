@@ -41,9 +41,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     });
 
     Sensor.getStandardList(context); // 각 공기질 항목 기준 가져오기
-    socketTimer.connectToSocket(context, true); // 소켓으로 디바이스 앱 먼저 연결
+    // socketTimer.connectToSocket(context, true); // 소켓으로 디바이스 앱 먼저 연결
+    print("@@@@@@@@@@@@@@ connectToSocket true");
     Future.delayed(Duration(seconds: 1), () {
-      socketTimer.connectToSocket(context, false);
+      // socketTimer.connectToSocket(context, false);
+      print("@@@@@@@@@@@@@@ connectToSocket false");
+
       // 타이머가 null 이면 타이머 실행
       if (socketTimer.getInitialTimer(context) == null) {
         socketTimer.connectToDeviceTimer(context); // 10초마다 소켓을 통해 기기로 데이터 전송
