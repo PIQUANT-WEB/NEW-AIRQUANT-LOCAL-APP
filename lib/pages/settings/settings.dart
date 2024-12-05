@@ -45,9 +45,9 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Device Setting',
-              style: TextStyle(color: Colors.black, fontSize: 30, fontWeight: FontWeight.w600))
-              .tr(),
+          title:
+              Text('Device Setting', style: TextStyle(color: Colors.black, fontSize: 30, fontWeight: FontWeight.w600))
+                  .tr(),
           backgroundColor: Colors.white,
           elevation: 0.0,
           leading: WillPopScope(
@@ -76,79 +76,82 @@ class _SettingsPageState extends State<SettingsPage> {
                 color: Colors.white30,
                 // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      title: const Text('Monitoring Item',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
-                          .tr(),
-                      selected: _selectedIndex == 0,
-                      onTap: () {
-                        _onItemTapped(0);
-                      },
+                    Column(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          title:
+                              const Text('Monitoring Item', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
+                                  .tr(),
+                          selected: _selectedIndex == 0,
+                          onTap: () {
+                            _onItemTapped(0);
+                          },
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          title: const Text('Standard Setting',
+                                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
+                              .tr(),
+                          selected: _selectedIndex == 1,
+                          onTap: () {
+                            _onItemTapped(1);
+                          },
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          title: const Text('Area name Setting',
+                                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
+                              .tr(),
+                          selected: _selectedIndex == 2,
+                          onTap: () {
+                            _onItemTapped(2);
+                          },
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          title: const Text('Data Cycle Setting',
+                                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
+                              .tr(),
+                          selected: _selectedIndex == 3,
+                          onTap: () {
+                            _onItemTapped(3);
+                          },
+                        ),
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          title:
+                              const Text('Download', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600)).tr(),
+                          selected: _selectedIndex == 4,
+                          onTap: () {
+                            _onItemTapped(4);
+                          },
+                        ),
+                      ],
                     ),
-                    ListTile(
-                      contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      title: const Text('Standard Setting',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
-                          .tr(),
-                      selected: _selectedIndex == 1,
-                      onTap: () {
-                        _onItemTapped(1);
-                      },
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      title: const Text('Area name Setting',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
-                          .tr(),
-                      selected: _selectedIndex == 2,
-                      onTap: () {
-                        _onItemTapped(2);
-                      },
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      title: const Text('Data Cycle Setting',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
-                          .tr(),
-                      selected: _selectedIndex == 3,
-                      onTap: () {
-                        _onItemTapped(3);
-                      },
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      title: const Text('Download',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600))
-                          .tr(),
-                      selected: _selectedIndex == 4,
-                      onTap: () {
-                        _onItemTapped(4);
-                      },
-                    ),
-                    SizedBox(
-                      height: 175,
-                    ),
-                    Container(
-                        width: 250,
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // 시리얼 넘버, 갱신 시간
-                          children: [
-                            Text('SN : ${dataStorage.SN}',
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.grey)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text('${'Renewal time'.tr()} : ${dataStorage.Date}',
-                                style: TextStyle(
-                                    fontSize: 15, color: Colors.grey)),
-                          ],
-                        ))
+                    Column(
+                      children: [
+                        Container(
+                            // width: 250,
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // 시리얼 넘버, 갱신 시간
+                              children: [
+                                Text('SN : ${dataStorage.SN}', style: TextStyle(fontSize: 15, color: Colors.grey)),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text('${'Renewal time'.tr()} : ${dataStorage.Date}',
+                                    style: TextStyle(fontSize: 15, color: Colors.grey)),
+                              ],
+                            )),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -159,8 +162,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(
                   child: Container(
-                    child: _widgetOptions[_selectedIndex],
-                  ))
+                child: _widgetOptions[_selectedIndex],
+              ))
             ],
           ),
         ),

@@ -40,23 +40,21 @@ class _CalendarInputWidgetState extends State<CalendarInputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextFormField(
-        readOnly: true,
-        style: TextStyle(fontSize: 20),
-        decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(0))),
-          labelText: widget.labelText,
-          hintText: '${widget.labelText}를 선택하세요',
-          hintStyle: TextStyle(fontSize: 20),
-          suffixIcon: Icon(Icons.calendar_today, color: Colors.grey),
-          contentPadding: EdgeInsets.all(10)
-        ),
-        controller: TextEditingController(
-          text: selectedDate != null ? dateFormat.format(selectedDate!) : '',
-        ),
-        onTap: () => _selectDate(context),
+    return TextFormField(
+      readOnly: true,
+      style: TextStyle(fontSize: 20),
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+        labelText: widget.labelText,
+        hintText: '${widget.labelText}를 선택하세요',
+        hintStyle: TextStyle(fontSize: 20),
+        suffixIcon: Icon(Icons.calendar_today, color: Colors.grey),
+        contentPadding: EdgeInsets.all(10)
       ),
+      controller: TextEditingController(
+        text: selectedDate != null ? dateFormat.format(selectedDate!) : '',
+      ),
+      onTap: () => _selectDate(context),
     );
   }
 }
